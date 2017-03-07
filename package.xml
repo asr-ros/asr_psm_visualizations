@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<package>
+	<name>asr_psm_visualizations</name>
+	<version>1.0.0</version>
+	<description>Offers visualizations for PSM learner and inference results using RVIZ and gnuplot.</description>
+	<author>Gehrung Joachim, Meißner Pascal</author>
+	<maintainer email="asr-ros@lists.kit.edu">Meißner Pascal</maintainer>
+	<license>BSD</license>
+
+	<buildtool_depend>catkin</buildtool_depend>
+
+	<build_depend>roscpp</build_depend>
+	<build_depend>tf</build_depend>
+	<build_depend>Eigen</build_depend>
+	<build_depend>Boost</build_depend>
+	<build_depend>asr_resources_for_psm</build_depend>
+	<build_depend>OpenCV</build_depend>
+	<build_depend>cmake_modules</build_depend>
+	<build_depend>std_msgs</build_depend>
+
+
+	<run_depend>cmake_modules</run_depend>
+	<run_depend>roscpp</run_depend>
+	<run_depend>tf</run_depend>
+	<run_depend>Eigen</run_depend>
+	<run_depend>Boost</run_depend>
+	<run_depend>asr_resources_for_psm</run_depend>
+	<run_depend>OpenCV</run_depend>
+	<run_depend>std_msgs</run_depend>
+</package>
