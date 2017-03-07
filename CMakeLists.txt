@@ -14,7 +14,7 @@ elseif(COMPILER_SUPPORTS_CXX0X)
 else()
         message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
-find_package(OpenCV 2.4.9.1 EXACT REQUIRED)
+find_package(OpenCV 2 REQUIRED)
 
 find_package(catkin REQUIRED COMPONENTS
         roscpp
