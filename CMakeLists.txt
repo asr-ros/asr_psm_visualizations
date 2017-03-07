@@ -14,7 +14,7 @@ elseif(COMPILER_SUPPORTS_CXX0X)
 else()
         message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
-
+find_package(OpenCV 2.4.9.1 EXACT REQUIRED)
 
 find_package(catkin REQUIRED COMPONENTS
         roscpp
@@ -31,22 +31,21 @@ find_package(Boost REQUIRED COMPONENTS
         filesystem
 )
 
-find_package(OpenCV REQUIRED)
 
 
 catkin_package(
         INCLUDE_DIRS include
         LIBRARIES visualization_server_lib
         CATKIN_DEPENDS roscpp tf asr_resources_for_psm std_msgs
-        DEPENDS Eigen Boost OpenCV
+        DEPENDS Eigen Boost
 )
 
 include_directories(
         include
+        ${OpenCV_INCLUDE_DIRS}
         ${Eigen_INCLUDE_DIRS}
         ${catkin_INCLUDE_DIRS}
         ${Boost_INCLUDE_DIRS}
-        ${OpenCV_INCLUDE_DIRS}
 )
 
 
@@ -69,10 +68,10 @@ add_library(visualization_server_lib
 )
 
 target_link_libraries(visualization_server_lib
+        ${OpenCV_LIBRARIES}
         ${Boost_LIBRARIES}
         ${catkin_LIBRARIES}
         ${Eigen_LIBRARIES}
-        ${OpenCV_LIBRARIES}
 )
 
 
