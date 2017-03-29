@@ -64,6 +64,7 @@ add_library(visualization_server_lib
                       src/visualization/psm/helper/AbstractExtendedVisualizer.cpp
                       src/visualization/psm/helper/AbstractVisualizer.cpp
                       src/visualization/gnuplot/GnuplotVisualization.cpp
+                      src/visualization/gnuplot/GMMGnuplotVisualization.cpp
                       src/helper/ColorHelper.cpp
 )
 
