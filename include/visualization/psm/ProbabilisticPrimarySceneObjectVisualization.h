@@ -36,6 +36,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #include <Eigen/Geometry>
 
 #include <Pose.h>
+#include <ISM/common_type/Pose.hpp>
 
 // Local includes
 #include "visualization/psm/ProbabilisticSecondarySceneObjectVisualization.h"
@@ -91,14 +92,14 @@ namespace Visualization
      * 
      * @param pPose Absolute pose of the primary scene object.
      */
-    void setPose(boost::shared_ptr<ResourcesForPsm::Pose> pPose);
+    void setPose(boost::shared_ptr<ISM::Pose> pPose);
     
     /**
      * The best absolute pose of the primary object. It was determined by the best scoring hypothesis regarding the assignment of evidence to the slots.
      * 
      * @param pPose Best absolute pose of the primary scene object.
      */
-    void setBestPoseCandidate(boost::shared_ptr<ResourcesForPsm::Pose> pPose);
+    void setBestPoseCandidate(boost::shared_ptr<ISM::Pose> pPose);
     
     /**
      * Sets the list of samples used for learning the gaussian mixture distribution.
@@ -221,7 +222,7 @@ namespace Visualization
     /**
      * The absolute pose of the primary object associated with this visualizer.
      */
-    boost::shared_ptr<ResourcesForPsm::Pose> mAbsolutePose;
+    boost::shared_ptr<ISM::Pose> mAbsolutePose;
     
     /**
      * The score of the best hypothesis.
@@ -241,12 +242,12 @@ namespace Visualization
     /**
      * Best absolute pose of the primary object. It was determined by the best scoring hypothesis regarding the assignment of evidence to the slots.
      */
-    boost::shared_ptr<ResourcesForPsm::Pose> mBestPose;
+    boost::shared_ptr<ISM::Pose> mBestPose;
     
     /**
      * Candidate for the best absolute position of the primary object. It was determined by the best scoring hypothesis regarding the assignment of evidence to the slots.
      */
-    boost::shared_ptr<ResourcesForPsm::Pose> mBestCandidatePose;
+    boost::shared_ptr<ISM::Pose> mBestCandidatePose;
     
     /**
      * A list of visualizers for all appended secondary scene objects.

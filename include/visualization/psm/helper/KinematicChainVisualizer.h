@@ -32,6 +32,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #include <Eigen/Eigenvalues>
 
 #include <Pose.h>
+#include <ISM/common_type/Pose.hpp>
 
 // Local includes
 #include "visualization/psm/helper/AbstractExtendedVisualizer.h"
@@ -68,7 +69,7 @@ namespace Visualization
      */
     void publishObjectPositionAsArrow(boost::shared_ptr<ros::Publisher> pPublisher,
 				      unsigned int& pMarkerId,
-				      const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+                      const boost::shared_ptr<ISM::Pose> pPose,
 				      double pQualityOfMatch);
     
     /**
@@ -80,7 +81,7 @@ namespace Visualization
      */
     void publishObjectPositionAsPoint(boost::shared_ptr<ros::Publisher> pPublisher,
 				      unsigned int& pMarkerId,
-				      const boost::shared_ptr<ResourcesForPsm::Pose> pPose);
+                      const boost::shared_ptr<ISM::Pose> pPose);
     
     /**
      * Publishes a point right at the given position and an arrow standing for the score.
@@ -93,7 +94,7 @@ namespace Visualization
      */
     void publishObjectPositionAsPointWithScore(boost::shared_ptr<ros::Publisher> pPublisher,
 					       unsigned int& pMarkerId,
-					       const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+                           const boost::shared_ptr<ISM::Pose> pPose,
 					       std::vector<double> pScores,
 					       double pQualityOfMatch);
     
@@ -159,7 +160,7 @@ namespace Visualization
      * @param pLength The length of the arrow.
      */
     visualization_msgs::Marker generatePerpendicularArrowMessage(unsigned int& pMarkerId,
-								 const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+                                 const boost::shared_ptr<ISM::Pose> pPose,
 								 double pQualityOfMatch, double pLength);
     
     /**
@@ -172,7 +173,7 @@ namespace Visualization
      * @param pLength The length of the chain.
      */
     visualization_msgs::Marker generateTermIndicatorMessage(unsigned int& pMarkerId,
-							    const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+                                const boost::shared_ptr<ISM::Pose> pPose,
 							    double pOffset,
 							    double pScore);
     

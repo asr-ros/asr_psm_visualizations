@@ -21,6 +21,7 @@ find_package(catkin REQUIRED COMPONENTS
         tf
         asr_resources_for_psm
         std_msgs
+        asr_lib_ism
 )
 find_package(cmake_modules)
 find_package(Eigen REQUIRED)

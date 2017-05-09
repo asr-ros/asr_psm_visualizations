@@ -50,7 +50,7 @@ namespace Visualization {
       visualizer->setDrawingParameters(pScale, pSigmaMultiplicator, pFrameId);
   }
   
-  void ProbabilisticPrimarySceneObjectVisualization::setPose(boost::shared_ptr<ResourcesForPsm::Pose> pPose)
+  void ProbabilisticPrimarySceneObjectVisualization::setPose(boost::shared_ptr<ISM::Pose> pPose)
   {
     // Check, if pointer is valid.
     if(!pPose)
@@ -60,7 +60,7 @@ namespace Visualization {
     mAbsolutePose = pPose;
   }
   
-  void ProbabilisticPrimarySceneObjectVisualization::setBestPoseCandidate(boost::shared_ptr<ResourcesForPsm::Pose> pPose)
+  void ProbabilisticPrimarySceneObjectVisualization::setBestPoseCandidate(boost::shared_ptr<ISM::Pose> pPose)
   {
     // Check, if pointer is valid.
     if(!pPose)

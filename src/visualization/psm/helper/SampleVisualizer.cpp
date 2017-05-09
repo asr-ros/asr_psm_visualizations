@@ -28,7 +28,7 @@ namespace Visualization {
   {
   }
   
-  void SampleVisualizer::setParentPose(boost::shared_ptr<ResourcesForPsm::Pose> pPose)
+  void SampleVisualizer::setParentPose(boost::shared_ptr<ISM::Pose> pPose)
   {
     // Check, if pointer is valid.
     if(!pPose)
@@ -111,7 +111,7 @@ namespace Visualization {
     // Iterate over all samples and add them to the visualization marker.
     for(unsigned int i = 0; i < pSamples.size(); i += VISUALIZATION_OFFSET)
     {
-      Eigen::Vector3d sample = (mParentPose->getPosition() + mParentPose->getOrientation().toRotationMatrix() * pSamples[i]) * getScaleFactor();
+      Eigen::Vector3d sample = (mParentPose->point->getEigen() + mParentPose->quat->getEigen().toRotationMatrix() * pSamples[i]) * getScaleFactor();
       
       geometry_msgs::Point to;
       to.x = sample[0];

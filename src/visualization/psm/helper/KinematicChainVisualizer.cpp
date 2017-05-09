@@ -30,7 +30,7 @@ namespace Visualization {
   
   void KinematicChainVisualizer::publishObjectPositionAsArrow(boost::shared_ptr<ros::Publisher> pPublisher,
 							      unsigned int& pMarkerId,
-							      const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+                                  const boost::shared_ptr<ISM::Pose> pPose,
 							      double pQualityOfMatch)
   {
     // Check, if publisher is available.
@@ -48,7 +48,7 @@ namespace Visualization {
   
   void KinematicChainVisualizer::publishObjectPositionAsPoint(boost::shared_ptr<ros::Publisher> pPublisher,
 							      unsigned int& pMarkerId,
-							      const boost::shared_ptr<ResourcesForPsm::Pose> pPose)
+                                  const boost::shared_ptr<ISM::Pose> pPose)
   {
     // Check, if publisher is available.
     if(!pPublisher)
@@ -57,7 +57,7 @@ namespace Visualization {
     visualization_msgs::MarkerArray array;
     
     // Generate the point message that symbolizes the object position.
-    array.markers.push_back(generatePointMessage(pMarkerId, pPose->getPosition()));
+    array.markers.push_back(generatePointMessage(pMarkerId, pPose->point->getEigen()));
     
     // Publish the markers.
     pPublisher->publish(array);
@@ -65,7 +65,7 @@ namespace Visualization {
   
   void KinematicChainVisualizer::publishObjectPositionAsPointWithScore(boost::shared_ptr<ros::Publisher> pPublisher,
 								       unsigned int& pMarkerId,
-								       const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+                                       const boost::shared_ptr<ISM::Pose> pPose,
 								       std::vector<double> pScores,
 								       double pQualityOfMatch)
   {
@@ -85,7 +85,7 @@ namespace Visualization {
       array.markers.push_back(generateTermIndicatorMessage(pMarkerId, pPose, i * (arrowLength / (pScores.size() * 2.0)), pScores[i]));
     
     // Generate the point message that symbolizes the object position.
-    array.markers.push_back(generatePointMessage(pMarkerId, pPose->getPosition()));
+    array.markers.push_back(generatePointMessage(pMarkerId, pPose->point->getEigen()));
     
     // Publish the markers.
     pPublisher->publish(array);
@@ -218,13 +218,13 @@ namespace Visualization {
   }
   
   visualization_msgs::Marker KinematicChainVisualizer::generatePerpendicularArrowMessage(unsigned int& pMarkerId,
-											 const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+                                             const boost::shared_ptr<ISM::Pose> pPose,
 											 double pQualityOfMatch,
 											 double pLength)
   {
     // This is the point where the arrow starts.
-    Eigen::Vector3d from = pPose->getPosition();
-    Eigen::Vector3d to = pPose->getPosition();
+    Eigen::Vector3d from = pPose->point->getEigen();
+    Eigen::Vector3d to = pPose->point->getEigen();
     
     // The arrow should point along the z-axis.
     from[2] -= 0.1 + pLength;
@@ -243,7 +243,7 @@ namespace Visualization {
   }
   
   visualization_msgs::Marker KinematicChainVisualizer::generateTermIndicatorMessage(unsigned int& pMarkerId,
-										    const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+                                            const boost::shared_ptr<ISM::Pose> pPose,
 										    double pOffset,
 										    double pScore)
   {
@@ -266,9 +266,9 @@ namespace Visualization {
     msg.action = visualization_msgs::Marker::ADD;
     
     // Draw the sphere at the given position.
-    msg.pose.position.x = pPose->getPosition()[0] * getScaleFactor();
-    msg.pose.position.y = pPose->getPosition()[1] * getScaleFactor();
-    msg.pose.position.z = pPose->getPosition()[2] * getScaleFactor() - (0.2 + pOffset);
+    msg.pose.position.x = pPose->point->getEigen()[0] * getScaleFactor();
+    msg.pose.position.y = pPose->point->getEigen()[1] * getScaleFactor();
+    msg.pose.position.z = pPose->point->getEigen()[2] * getScaleFactor() - (0.2 + pOffset);
     
     // orientation is irrelevant.getScaleFactor
     msg.pose.orientation.w = 1;
