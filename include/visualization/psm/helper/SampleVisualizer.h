@@ -39,6 +39,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #include <opencv2/highgui/highgui.hpp>
 
 #include <Pose.h>
+#include <ISM/common_type/Pose.hpp>
 
 // Local includes3
 #include "visualization/psm/helper/AbstractExtendedVisualizer.h"
@@ -75,7 +76,7 @@ namespace Visualization
      * 
      * @param pPose Absolute pose of the primary scene object.
      */
-    void setParentPose(boost::shared_ptr<ResourcesForPsm::Pose> pPose);
+    void setParentPose(boost::shared_ptr<ISM::Pose> pPose);
     
     /**
      * Publishes a trajectory composed of the samples used for learning.
@@ -124,6 +125,6 @@ namespace Visualization
     /**
      * Absolute pose of the parent object.
      */
-    boost::shared_ptr<ResourcesForPsm::Pose> mParentPose;
+    boost::shared_ptr<ISM::Pose> mParentPose;
   };
 }

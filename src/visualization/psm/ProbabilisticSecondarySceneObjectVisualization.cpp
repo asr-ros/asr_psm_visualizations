@@ -99,7 +99,7 @@ namespace Visualization {
     mCertainty = 0.0;
   }
   
-  void ProbabilisticSecondarySceneObjectVisualization::setLastPose(boost::shared_ptr<ResourcesForPsm::Pose> pPose)
+  void ProbabilisticSecondarySceneObjectVisualization::setLastPose(boost::shared_ptr<ISM::Pose> pPose)
   {
     // Check, if pointer is valid.
     if(!pPose)
@@ -108,7 +108,7 @@ namespace Visualization {
     mLastObjectPose = pPose;
   }
   
-  void ProbabilisticSecondarySceneObjectVisualization::setBestCandidatePose(boost::shared_ptr<ResourcesForPsm::Pose> pPose)
+  void ProbabilisticSecondarySceneObjectVisualization::setBestCandidatePose(boost::shared_ptr<ISM::Pose> pPose)
   {
     // Check, if pointer is valid.
     if(!pPose)
@@ -123,7 +123,7 @@ namespace Visualization {
     mBestScoreCandidate = std::min(pScore, 1.0);
   }
   
-  void ProbabilisticSecondarySceneObjectVisualization::setParentPose(boost::shared_ptr<ResourcesForPsm::Pose> pPose)
+  void ProbabilisticSecondarySceneObjectVisualization::setParentPose(boost::shared_ptr<ISM::Pose> pPose)
   {
     // Check, if pointer is valid.
     if(!pPose)
@@ -207,7 +207,7 @@ namespace Visualization {
     {
       // Draw the link between parent object and this object.
       // Apply some normalization term for the color of the kinematic chain.
-      visualizerKinematics.publishLink(mPublisher, pMarkerId, mParentPose->getPosition(), mBestPose->getPosition(), std::min(mBestScore / 0.02, 1.0)); // NOTE The normalization constant here is responsible for coloring the arrow between objects.
+      visualizerKinematics.publishLink(mPublisher, pMarkerId, mParentPose->point->getEigen(), mBestPose->point->getEigen(), std::min(mBestScore / 0.02, 1.0)); // NOTE The normalization constant here is responsible for coloring the arrow between objects.
     }
   }
   

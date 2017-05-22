@@ -32,6 +32,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #include <Eigen/Eigenvalues>
 
 #include <Pose.h>
+#include <ISM/common_type/Pose.hpp>
 
 // Local includes
 #include "visualization/psm/helper/AbstractVisualizer.h"
@@ -68,7 +69,7 @@ namespace Visualization
      */
     void publishFrame(boost::shared_ptr<ros::Publisher> pPublisher,
 		      unsigned int& pMarkerId,
-		      const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+              const boost::shared_ptr<ISM::Pose> pPose,
 		      double pSize);
     
   private:
@@ -84,7 +85,7 @@ namespace Visualization
      */
     visualization_msgs::Marker generateAxis(const unsigned int pMarkerId,
 					     const unsigned int pAxis,
-					     const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+                         const boost::shared_ptr<ISM::Pose> pPose,
 					     double pSize);
   };
 }

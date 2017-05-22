@@ -33,7 +33,7 @@ namespace Visualization {
     mSigmaMultiplicator = pSigmaMultiplicator;
   }
   
-  void GaussianKernelVisualizer::setParentPose(boost::shared_ptr<ResourcesForPsm::Pose> pPose)
+  void GaussianKernelVisualizer::setParentPose(boost::shared_ptr<ISM::Pose> pPose)
   {
     // Check, if pointer is valid.
     if(!pPose)
@@ -163,8 +163,8 @@ namespace Visualization {
     /************************************
      * Create arrow from the parent position to the kernel.
      ************************************/
-    modelMarkers.markers.push_back(generateArrowMessage(pMarkerId, mParentPose->getPosition(), mParentPose->getPosition() + mParentPose->getOrientation().toRotationMatrix() * pMean));
-    modelMarkers.markers.push_back(generateSphereMessage(pMarkerId, mParentPose->getPosition()));
+    modelMarkers.markers.push_back(generateArrowMessage(pMarkerId, mParentPose->point->getEigen(), mParentPose->point->getEigen() + mParentPose->quat->getEigen().toRotationMatrix() * pMean));
+    modelMarkers.markers.push_back(generateSphereMessage(pMarkerId, mParentPose->point->getEigen()));
     
     /************************************
      * Publish the results.
@@ -268,7 +268,7 @@ namespace Visualization {
     Eigen::SelfAdjointEigenSolver<Eigen::Matrix3d> es(pCovariance);
     
     // Create the rotation matrix that is required for rotating the base vectors of the covariance ellipse into the world coordinate system.
-    Eigen::Matrix3d rotationFromParentToWorld = mParentPose->getOrientation().toRotationMatrix();
+    Eigen::Matrix3d rotationFromParentToWorld = mParentPose->quat->getEigen().toRotationMatrix();
     
     // Extract the tree base vectors and rotate them according to the relative orientation of this secondary scene object to the primary scene object.
     Eigen::Vector3d baseX = rotationFromParentToWorld * es.eigenvectors().col(0);
@@ -279,7 +279,7 @@ namespace Visualization {
     Eigen::Vector3d positionInParentFrame = rotationFromParentToWorld * pMean;
     
     // The position of the ellipsoid is equal to the mean vector of the normal distribution.
-    Eigen::Vector3d position = mParentPose->getPosition();
+    Eigen::Vector3d position = mParentPose->point->getEigen();
     tf::Vector3 tfEllipsoidPosition(position[0] + positionInParentFrame[0],
 				     position[1] + positionInParentFrame[1],
 				     position[2] + positionInParentFrame[2]);
@@ -438,7 +438,7 @@ namespace Visualization {
     msg.scale.x = msg.scale.y = 0.005;
     
     // Create the rotation matrix that is required for rotating the base vectors of the covariance ellipse into the world coordinate system.
-    Eigen::Matrix3d rotationFromParentToWorld = mParentPose->getOrientation().toRotationMatrix();
+    Eigen::Matrix3d rotationFromParentToWorld = mParentPose->quat->getEigen().toRotationMatrix();
     
     // Extract the axis vector and rotate it from the parent coordinate frame into world coordinates.
     // The axis vector is composed of the eigenvector scaled by the eigen value.    
@@ -448,7 +448,7 @@ namespace Visualization {
     Eigen::Vector3d positionInParentFrame = rotationFromParentToWorld * pMean;
     
     // Extract position of parent object.
-    Eigen::Vector3d position = mParentPose->getPosition();
+    Eigen::Vector3d position = mParentPose->point->getEigen();
     
     // Create the starting point.
     geometry_msgs::Point start;
@@ -508,12 +508,12 @@ namespace Visualization {
     }
 
     // Draw the points relative to the parent scene object.
-    Eigen::Vector3d position = mParentPose->getPosition();
+    Eigen::Vector3d position = mParentPose->point->getEigen();
     msg.pose.position.x = position[0] * getScaleFactor();
     msg.pose.position.y = position[1] * getScaleFactor();
     msg.pose.position.z = position[2] * getScaleFactor();
     
-    Eigen::Quaternion<double> orientation = mParentPose->getOrientation();
+    Eigen::Quaternion<double> orientation = mParentPose->quat->getEigen();
     msg.pose.orientation.w = orientation.w();
     msg.pose.orientation.x = orientation.x();
     msg.pose.orientation.y = orientation.y();

@@ -30,7 +30,7 @@ namespace Visualization {
   
   void CoordinateFrameVisualizer::publishFrame(boost::shared_ptr<ros::Publisher> pPublisher,
 						 unsigned int& pMarkerId,
-						 const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+                         const boost::shared_ptr<ISM::Pose> pPose,
 					         double pSize)
   {
     // Check, if publisher is available.
@@ -54,7 +54,7 @@ namespace Visualization {
     
   visualization_msgs::Marker CoordinateFrameVisualizer::generateAxis(const unsigned int pMarkerId,
 								      const unsigned int pAxis,
-								      const boost::shared_ptr<ResourcesForPsm::Pose> pPose,
+                                      const boost::shared_ptr<ISM::Pose> pPose,
 								      double pSize)
   {
     visualization_msgs::Marker msg;
@@ -97,12 +97,12 @@ namespace Visualization {
     msg.points.push_back(stop);
     
     // Set position and orientation.
-    Eigen::Vector3d position = pPose->getPosition();
+    Eigen::Vector3d position = pPose->point->getEigen();
     msg.pose.position.x = position[0];
     msg.pose.position.y = position[1];
     msg.pose.position.z = position[2];
     
-    Eigen::Quaternion<double> orientation = pPose->getOrientation();
+    Eigen::Quaternion<double> orientation = pPose->quat->getEigen();
     msg.pose.orientation.w = orientation.w();
     msg.pose.orientation.x = orientation.x();
     msg.pose.orientation.y = orientation.y();

@@ -34,6 +34,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #include <Eigen/Eigenvalues>
 
 #include <Pose.h>
+#include <ISM/common_type/Pose.hpp>
 
 // Local includes
 #include "visualization/psm/helper/CoordinateFrameVisualizer.h"
@@ -111,14 +112,14 @@ namespace Visualization
      * 
      * @param pPose The last known pose.
      */
-    void setLastPose(boost::shared_ptr<ResourcesForPsm::Pose> pPose);
+    void setLastPose(boost::shared_ptr<ISM::Pose> pPose);
     
     /**
      * Sets a candidate for the absolute pose of the associated object. The primary scene object will decide based on the hypothsis score, if it is the best absolute pose.
      * 
      * @param pPose Best absolute pose of the primary scene object.
      */
-    void setBestCandidatePose(boost::shared_ptr<ResourcesForPsm::Pose> pPose);
+    void setBestCandidatePose(boost::shared_ptr<ISM::Pose> pPose);
     
     /**
      * Sets a candidate pScore for the link between this object and its parent. The primary scene object will decide based on the hypothsis score, if it is the best score for the link.
@@ -132,7 +133,7 @@ namespace Visualization
      * 
      * @param pPose Absolute pose of the primary scene object.
      */
-    void setParentPose(boost::shared_ptr<ResourcesForPsm::Pose> pPose);
+    void setParentPose(boost::shared_ptr<ISM::Pose> pPose);
     
     /**
      * Sets the samples used for model learning and the corresponding poses for the parent object.
@@ -249,22 +250,22 @@ namespace Visualization
     /**
      * The last known pose of the object associated with this visualizer.
      */
-    boost::shared_ptr<ResourcesForPsm::Pose> mLastObjectPose;
+    boost::shared_ptr<ISM::Pose> mLastObjectPose;
     
     /**
      * Best absolute pose of the associated object. It was determined by the best scoring hypothesis regarding the assignment of evidence to the slots.
      */
-    boost::shared_ptr<ResourcesForPsm::Pose> mBestPose;
+    boost::shared_ptr<ISM::Pose> mBestPose;
     
     /**
      * Candidate for the best absolute position of the associated object. It was determined by the best scoring hypothesis regarding the assignment of evidence to the slots.
      */
-    boost::shared_ptr<ResourcesForPsm::Pose> mBestCandidatePose;
+    boost::shared_ptr<ISM::Pose> mBestCandidatePose;
     
     /**
      * Absolute pose of the parent object.
      */
-    boost::shared_ptr<ResourcesForPsm::Pose> mParentPose;
+    boost::shared_ptr<ISM::Pose> mParentPose;
     
     /**
      * The kernels that will be visualized in form of covariance ellipses.
