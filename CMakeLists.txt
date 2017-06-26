@@ -24,7 +24,7 @@ find_package(catkin REQUIRED COMPONENTS
         asr_lib_ism
 )
 find_package(cmake_modules)
-find_package(Eigen REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 find_package(Boost REQUIRED COMPONENTS
         iostreams
@@ -38,13 +38,13 @@ catkin_package(
         INCLUDE_DIRS include
         LIBRARIES visualization_server_lib
         CATKIN_DEPENDS roscpp tf asr_resources_for_psm std_msgs
-        DEPENDS Eigen Boost
+        DEPENDS Boost EIGEN3
 )
 
 include_directories(
         include
         ${OpenCV_INCLUDE_DIRS}
-        ${Eigen_INCLUDE_DIRS}
+        ${EIGEN3_INCLUDE_DIRS}
         ${catkin_INCLUDE_DIRS}
         ${Boost_INCLUDE_DIRS}
 )
@@ -72,7 +72,7 @@ target_link_libraries(visualization_server_lib
         ${OpenCV_LIBRARIES}
         ${Boost_LIBRARIES}
         ${catkin_LIBRARIES}
-        ${Eigen_LIBRARIES}
+        ${EIGEN3_LIBRARIES}
 )
 
 
